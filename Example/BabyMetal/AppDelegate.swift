@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  BabyMetal
 //
-//  Created by tomoya.hirano on 07/04/2018.
-//  Copyright (c) 2018 tomoya.hirano. All rights reserved.
+//  Created by noppefoxwolf on 07/04/2018.
+//  Copyright (c) 2018 noppefoxwolf. All rights reserved.
 //
 
 import UIKit

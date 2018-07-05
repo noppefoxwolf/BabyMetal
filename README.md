@@ -1,6 +1,6 @@
 # BabyMetal
 
-[![CI Status](https://img.shields.io/travis/tomoya.hirano/BabyMetal.svg?style=flat)](https://travis-ci.org/tomoya.hirano/BabyMetal)
+[![CI Status](https://img.shields.io/travis/noppefoxwolf/BabyMetal.svg?style=flat)](https://travis-ci.org/noppefoxwolf/BabyMetal)
 [![Version](https://img.shields.io/cocoapods/v/BabyMetal.svg?style=flat)](https://cocoapods.org/pods/BabyMetal)
 [![License](https://img.shields.io/cocoapods/l/BabyMetal.svg?style=flat)](https://cocoapods.org/pods/BabyMetal)
 [![Platform](https://img.shields.io/cocoapods/p/BabyMetal.svg?style=flat)](https://cocoapods.org/pods/BabyMetal)
@@ -22,7 +22,7 @@ pod 'BabyMetal'
 
 ## Author
 
-tomoya.hirano, tomoya.hirano@dena.com
+noppefoxwolf, noppelabs@gmail.com
 
 ## License
 
