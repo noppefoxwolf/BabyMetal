@@ -16,7 +16,7 @@ final class ViewController: UIViewController {
   lazy var sobelFilter = SobelFilter()
   lazy var blurFilter = BlurFilter()
   lazy var grayScaleFilter = GrayScaleFilter()
-  lazy var preview = PreviewView(frame: view.bounds, device: MTLCreateSystemDefaultDevice()!)
+  lazy var preview = PreviewView(frame: CGRect.init(x: 0, y: 0, width: 160, height: 320), device: MTLCreateSystemDefaultDevice()!)
   lazy var pipPreview = PreviewView(frame: .init(x: 20, y: 20, width: 200, height: 200), device: MTLCreateSystemDefaultDevice()!)
   
   override func viewDidLoad() {
