@@ -11,6 +11,7 @@ import BabyMetal
 
 final class ViewController: UIViewController {
   
+  lazy var camera = CameraSource()
   lazy var source = ImageSource(name: "example")
   lazy var filter = BlurFilter()
   lazy var preview = PreviewView(frame: view.bounds, device: MTLCreateSystemDefaultDevice()!)
@@ -19,8 +20,12 @@ final class ViewController: UIViewController {
     super.viewDidLoad()
     view.addSubview(preview)
     
-    source >>> filter >>> preview
+    //source >>> filter >>> preview
+    //source.update()
     
-    source.update()
+//    camera >>> filter >>> preview
+    camera >>> preview
+    camera.startRunning()
+    
   }
 }
