@@ -20,7 +20,8 @@ public class GrayScaleFilter: SourceType, DestinationType {
     targets.append(dst)
   }
   
-  public func render(_ texture: MTLTexture) {
+  public func render(_ frame: Frame) {
+    let texture = frame.texture
     let w = texture.width
     let h = texture.height
     let device = MTLCreateSystemDefaultDevice()!
@@ -63,7 +64,8 @@ public class GrayScaleFilter: SourceType, DestinationType {
     
     commandBuffer.commit()
     
-    targets.forEach({ $0.render(outputTexture) })
+    let outputFrame = Frame(texture: outputTexture, frame: frame)
+    targets.forEach({ $0.render(outputFrame) })
   }
   
   private func makeRenderPipelineState(device: MTLDevice, texture: MTLTexture, vertexFunctionName: String, fragmentFunctionName: String) -> MTLRenderPipelineState {

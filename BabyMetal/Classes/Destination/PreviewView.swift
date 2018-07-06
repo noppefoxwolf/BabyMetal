@@ -67,8 +67,8 @@ public class PreviewView: MTKView, DestinationType, MTKViewDelegate {
     commandBuffer.commit()
   }
   
-  public func render(_ texture: MTLTexture) {
-    renderTexture = texture
+  public func render(_ frame: Frame) {
+    renderTexture = frame.texture
     DispatchQueue.main.async { [weak self] in
       self?.setNeedsDisplay()
     }

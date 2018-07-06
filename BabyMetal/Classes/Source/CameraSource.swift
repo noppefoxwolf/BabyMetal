@@ -49,7 +49,7 @@ public class CameraSource: SourceType, CaptureDeviceDelegate {
                                                            &imageTexture)
     if result == kCVReturnSuccess {
       let texture = CVMetalTextureGetTexture(imageTexture!)!
-      targets.forEach({ $0.render(texture) })
+      targets.forEach({ $0.render(Frame(texture: texture, sampleBuffer: sampleBuffer)) })
     }
   }
 }

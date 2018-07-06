@@ -8,6 +8,6 @@
 import UIKit
 
 public protocol DestinationType {
-  func render(_ texture: MTLTexture)
+  func render(_ frame: Frame)
 }
 

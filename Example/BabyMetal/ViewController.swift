@@ -8,11 +8,12 @@
 
 import UIKit
 import BabyMetal
+import Photos
 
 final class ViewController: UIViewController {
   
   lazy var camera = CameraSource()
-  lazy var source = ImageSource(name: "example")
+  lazy var image = ImageSource(name: "example")
   lazy var sobelFilter = SobelFilter()
   lazy var blurFilter = BlurFilter()
   lazy var grayScaleFilter = GrayScaleFilter()
@@ -25,19 +26,32 @@ final class ViewController: UIViewController {
     view.addSubview(preview)
     view.addSubview(pipPreview)
     
-    //source >>> filter >>> preview
-    //source.update()
+    //image >>> filter >>> preview
+    //image.update()
     
     camera >>> sobelFilter >>> blurFilter >>> preview
     camera >>> pipPreview
-    camera >>> recoder
+    camera >>> sobelFilter >>> recoder
     
     camera.startRunning()
     
   }
   
-  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     recoder.startWriting()
+  }
+  
+  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    recoder.finishWriting {
+      print("done")
+      let filePath = NSTemporaryDirectory() + "/sample.mp4"
+      PHPhotoLibrary.shared().performChanges({
+        let url = URL(fileURLWithPath: filePath)
+        PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
+      }, completionHandler: { (saved, error) in
+        print("saved", saved, error)
+      })
+    }
   }
 }
 

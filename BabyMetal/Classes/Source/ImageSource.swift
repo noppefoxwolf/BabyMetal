@@ -26,6 +26,6 @@ public class ImageSource: SourceType {
   
   //強制的に更新
   public func update() {
-    targets.forEach({ $0.render(texture) })
+    targets.forEach({ $0.render(Frame(texture: texture)) })
   }
 }
