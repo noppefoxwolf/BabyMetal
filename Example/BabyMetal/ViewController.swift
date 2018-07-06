@@ -11,9 +11,8 @@ import BabyMetal
 import Photos
 
 final class ViewController: UIViewController {
-  
   lazy var camera = CameraSource()
-  lazy var image = ImageSource(name: "example")
+  lazy var image = ImageSource(name: "transparency")
   lazy var sobelFilter = SobelFilter()
   lazy var blurFilter = BlurFilter()
   lazy var grayScaleFilter = GrayScaleFilter()
@@ -21,22 +20,20 @@ final class ViewController: UIViewController {
   lazy var pipPreview = PreviewView(frame: .init(x: 20, y: 20, width: 200, height: 200), device: MTLCreateSystemDefaultDevice()!)
   lazy var recoder = VideoRecoder(filePath: NSTemporaryDirectory() + "/sample.mp4")
   lazy var capture = ImageCapture()
+  lazy var blender = AlphaBlender(base: camera, overlay: image)
   
   override func viewDidLoad() {
     super.viewDidLoad()
     view.addSubview(preview)
     view.addSubview(pipPreview)
     
-    //image >>> filter >>> preview
-    //image.update()
-    
     camera >>> sobelFilter >>> blurFilter >>> preview
                                blurFilter >>> capture
                sobelFilter >>> recoder
-    camera >>> pipPreview
-    
+    blender >>> pipPreview
     
     camera.startRunning()
+    image.update()
   }
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
