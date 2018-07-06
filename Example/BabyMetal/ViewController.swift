@@ -13,7 +13,8 @@ final class ViewController: UIViewController {
   
   lazy var camera = CameraSource()
   lazy var source = ImageSource(name: "example")
-  lazy var filter = BlurFilter()
+  lazy var sobelFilter = SobelFilter()
+  lazy var blurFilter = BlurFilter()
   lazy var preview = PreviewView(frame: view.bounds, device: MTLCreateSystemDefaultDevice()!)
   
   override func viewDidLoad() {
@@ -23,7 +24,7 @@ final class ViewController: UIViewController {
     //source >>> filter >>> preview
     //source.update()
     
-    camera >>> filter >>> preview
+    camera >>> sobelFilter >>> blurFilter >>> preview
 //    camera >>> preview
     camera.startRunning()
     
