@@ -23,8 +23,8 @@ final class ViewController: UIViewController {
     //source >>> filter >>> preview
     //source.update()
     
-//    camera >>> filter >>> preview
-    camera >>> preview
+    camera >>> filter >>> preview
+//    camera >>> preview
     camera.startRunning()
     
   }

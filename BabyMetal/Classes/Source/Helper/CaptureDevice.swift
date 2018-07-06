@@ -25,7 +25,7 @@ final class CaptureDevice: NSObject, AVCaptureVideoDataOutputSampleBufferDelegat
     session.addOutput(output)
     output.setSampleBufferDelegate(self, queue: DispatchQueue.main)
     output.connections.forEach({ $0.videoOrientation = .portrait })
-    output.videoSettings = [kCVPixelBufferMetalCompatibilityKey : true] as [String : Any]
+    output.videoSettings = [kCVPixelBufferPixelFormatTypeKey : kCVPixelFormatType_32BGRA] as [String : Any]
   }
   
   func startRunning() {
