@@ -47,7 +47,6 @@ public class SobelFilter: SourceType, DestinationType {
     kernel.encode(commandBuffer: commandBuffer, sourceTexture: texture, destinationTexture: outputTexture)
     
     commandBuffer.commit()
-    commandBuffer.waitUntilCompleted()
     
     targets.forEach({ $0.render(outputTexture) })
   }

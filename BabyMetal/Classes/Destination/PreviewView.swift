@@ -51,11 +51,12 @@ public class PreviewView: MTKView, DestinationType, MTKViewDelegate {
     
     commandBuffer.present(drawable)
     commandBuffer.commit()
-//    commandBuffer.waitUntilCompleted()
   }
   
   public func render(_ texture: MTLTexture) {
     renderTexture = texture
-    setNeedsDisplay()
+    DispatchQueue.main.async { [weak self] in
+      self?.setNeedsDisplay()
+    }
   }
 }

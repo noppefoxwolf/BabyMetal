@@ -47,7 +47,6 @@ public class BlurFilter: SourceType, DestinationType {
     kernel.encode(commandBuffer: commandBuffer, inPlaceTexture: &outputTexture, fallbackCopyAllocator: nil)
     
     commandBuffer.commit()
-    commandBuffer.waitUntilCompleted()
     
     targets.forEach({ $0.render(outputTexture) })
   }

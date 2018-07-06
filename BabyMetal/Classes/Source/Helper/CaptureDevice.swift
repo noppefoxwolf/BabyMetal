@@ -16,6 +16,7 @@ final class CaptureDevice: NSObject, AVCaptureVideoDataOutputSampleBufferDelegat
   private lazy var session = AVCaptureSession()
   private lazy var input = try! AVCaptureDeviceInput(device: device)
   private lazy var output = AVCaptureVideoDataOutput()
+  private let cameraQueue = DispatchQueue.init(label: "com.noppelabs.babymetal.camera")
   var delegate: CaptureDeviceDelegate? = nil
   
   override init() {
@@ -23,7 +24,7 @@ final class CaptureDevice: NSObject, AVCaptureVideoDataOutputSampleBufferDelegat
     session.sessionPreset = .hd1280x720
     session.addInput(input)
     session.addOutput(output)
-    output.setSampleBufferDelegate(self, queue: DispatchQueue.main)
+    output.setSampleBufferDelegate(self, queue: cameraQueue)
     output.connections.forEach({ $0.videoOrientation = .portrait })
     output.videoSettings = [kCVPixelBufferPixelFormatTypeKey : kCVPixelFormatType_32BGRA] as [String : Any]
   }
