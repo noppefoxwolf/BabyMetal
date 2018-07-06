@@ -14,5 +14,5 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '10.0'
 
-  s.source_files = 'BabyMetal/Classes/**/*'
+  s.source_files = 'BabyMetal/Classes/**/*' 
 end
