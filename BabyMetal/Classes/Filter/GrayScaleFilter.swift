@@ -8,16 +8,11 @@
 import MetalKit
 import MetalPerformanceShaders
 
-public class GrayScaleFilter: SourceType, DestinationType {
-  var targets: [DestinationType] = []
+public class GrayScaleFilter: Source, DestinationType {
   private var pipelineState: MTLRenderPipelineState? = nil
   
-  public init() {
-    
-  }
-  
-  public func addTarget(_ dst: DestinationType) {
-    targets.append(dst)
+  public override init() {
+    super.init()
   }
   
   public func render(_ frame: Frame) {

@@ -8,8 +8,7 @@
 import UIKit
 import MetalKit
 
-public class ImageSource: SourceType {
-  private var targets: [DestinationType] = []
+public class ImageSource: Source {
   private let texture: MTLTexture
   
   public init(name: String, scaleFactor: CGFloat = 1.0, bundle: Bundle = .main) {
@@ -18,10 +17,6 @@ public class ImageSource: SourceType {
     texture = try! loader.newTexture(name: name,
                                      scaleFactor: scaleFactor,
                                      bundle: bundle)
-  }
-  
-  public func addTarget(_ dst: DestinationType) {
-    targets.append(dst)
   }
   
   //強制的に更新

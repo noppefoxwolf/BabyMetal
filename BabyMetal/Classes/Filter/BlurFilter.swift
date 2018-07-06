@@ -8,15 +8,9 @@
 import MetalKit
 import MetalPerformanceShaders
 
-public class BlurFilter: SourceType, DestinationType {
-  var targets: [DestinationType] = []
-  
-  public init() {
-    
-  }
-  
-  public func addTarget(_ dst: DestinationType) {
-    targets.append(dst)
+public class BlurFilter: Source, DestinationType {
+  public override init() {
+    super.init()
   }
   
   public func render(_ frame: Frame) {

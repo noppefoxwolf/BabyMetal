@@ -9,12 +9,12 @@ import UIKit
 import AVFoundation
 import MetalKit
 
-public class CameraSource: SourceType, CaptureDeviceDelegate {
-  private var targets: [DestinationType] = []
+public class CameraSource: Source, CaptureDeviceDelegate {
   private var camera = CaptureDevice()
   private var textureCache : CVMetalTextureCache? = nil
   
-  public init() {
+  public override init() {
+    super.init()
     camera.delegate = self
     
     let device = MTLCreateSystemDefaultDevice()!
@@ -27,10 +27,6 @@ public class CameraSource: SourceType, CaptureDeviceDelegate {
   
   public func stopRunning() {
     camera.stopRunning()
-  }
-  
-  public func addTarget(_ dst: DestinationType) {
-    targets.append(dst)
   }
   
   func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {

@@ -7,8 +7,8 @@
 
 import UIKit
 
-public class AlphaBlender: SourceType, InternalDestinationDelegate {
-  private var targets: [DestinationType] = []
+//TODO: 色おかしくなる
+public class AlphaBlender: Source, InternalDestinationDelegate {
   private let baseDst: InternalDestination
   private let overlayDst: InternalDestination
   private var pipelineState: MTLRenderPipelineState? = nil
@@ -16,14 +16,11 @@ public class AlphaBlender: SourceType, InternalDestinationDelegate {
   public init(base: SourceType, overlay: SourceType) {
     baseDst = InternalDestination()
     overlayDst = InternalDestination()
+    super.init()
     baseDst.delegate = self
     overlayDst.delegate = self
     base.addTarget(baseDst)
     overlay.addTarget(overlayDst)
-  }
-  
-  public func addTarget(_ dst: DestinationType) {
-    targets.append(dst)
   }
   
   func frameUpdated() {
