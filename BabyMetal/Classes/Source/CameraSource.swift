@@ -34,9 +34,6 @@ public class CameraSource: SourceType, CaptureDeviceDelegate {
   }
   
   func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-    
-    
-    
     let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
     let width = CVPixelBufferGetWidthOfPlane(imageBuffer, 0)
     let height = CVPixelBufferGetHeightOfPlane(imageBuffer, 0)

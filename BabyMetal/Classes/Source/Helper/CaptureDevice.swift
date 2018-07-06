@@ -20,7 +20,7 @@ final class CaptureDevice: NSObject, AVCaptureVideoDataOutputSampleBufferDelegat
   
   override init() {
     super.init()
-    session.sessionPreset = .iFrame960x540
+    session.sessionPreset = .hd1280x720
     session.addInput(input)
     session.addOutput(output)
     output.setSampleBufferDelegate(self, queue: DispatchQueue.main)

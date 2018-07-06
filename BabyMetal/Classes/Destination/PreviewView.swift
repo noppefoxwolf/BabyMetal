@@ -8,22 +8,32 @@
 import UIKit
 import MetalKit
 
-public class PreviewView: MTKView, DestinationType {
+public class PreviewView: MTKView, DestinationType, MTKViewDelegate {
   private let commandQueue: MTLCommandQueue
+  private var renderTexture: MTLTexture? = nil
   
   public override init(frame frameRect: CGRect, device: MTLDevice?) {
     commandQueue = device!.makeCommandQueue()!
     super.init(frame: frameRect, device: device)
+    delegate = self
     framebufferOnly = false
+    enableSetNeedsDisplay = true
   }
   
   public required init(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
-  public func render(_ texture: MTLTexture) {
+  public func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
+    
+  }
+  
+  public func draw(in view: MTKView) {
+    guard let texture = renderTexture else { return }
     let drawable = currentDrawable!
     colorPixelFormat = texture.pixelFormat
+    drawableSize = CGSize(width: texture.width, height: texture.height)
+    
     let commandBuffer = commandQueue.makeCommandBuffer()!
     let encoder = commandBuffer.makeBlitCommandEncoder()!
     let w = texture.width
@@ -41,6 +51,11 @@ public class PreviewView: MTKView, DestinationType {
     
     commandBuffer.present(drawable)
     commandBuffer.commit()
-    commandBuffer.waitUntilCompleted()
+//    commandBuffer.waitUntilCompleted()
+  }
+  
+  public func render(_ texture: MTLTexture) {
+    renderTexture = texture
+    setNeedsDisplay()
   }
 }
