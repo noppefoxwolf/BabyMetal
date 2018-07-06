@@ -13,7 +13,6 @@ public class CameraSource: SourceType, CaptureDeviceDelegate {
   private var targets: [DestinationType] = []
   private var camera = CaptureDevice()
   private var textureCache : CVMetalTextureCache? = nil
-
   
   public init() {
     camera.delegate = self
