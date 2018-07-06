@@ -59,7 +59,6 @@ internal class VideoRecordSession {
     var sampleBuffer: CMSampleBuffer? = nil
     var timing = CMSampleTimingInfo()
     timing.presentationTimeStamp = frame.timingInfo.presentationTimeStamp
-    print(timing)
     CMSampleBufferCreateForImageBuffer(kCFAllocatorDefault,
                                        pixelBuffer!,
                                        true,

@@ -20,6 +20,7 @@ final class ViewController: UIViewController {
   lazy var preview = PreviewView(frame: view.bounds, device: MTLCreateSystemDefaultDevice()!)
   lazy var pipPreview = PreviewView(frame: .init(x: 20, y: 20, width: 200, height: 200), device: MTLCreateSystemDefaultDevice()!)
   lazy var recoder = VideoRecoder(filePath: NSTemporaryDirectory() + "/sample.mp4")
+  lazy var capture = ImageCapture()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -30,11 +31,12 @@ final class ViewController: UIViewController {
     //image.update()
     
     camera >>> sobelFilter >>> blurFilter >>> preview
+                               blurFilter >>> capture
+               sobelFilter >>> recoder
     camera >>> pipPreview
-    camera >>> sobelFilter >>> recoder
+    
     
     camera.startRunning()
-    
   }
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -48,6 +50,14 @@ final class ViewController: UIViewController {
       PHPhotoLibrary.shared().performChanges({
         let url = URL(fileURLWithPath: filePath)
         PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
+      }, completionHandler: { (saved, error) in
+        print("saved", saved, error)
+      })
+    }
+    
+    capture.snapshot { (image) in
+      PHPhotoLibrary.shared().performChanges({
+        PHAssetChangeRequest.creationRequestForAsset(from: image)
       }, completionHandler: { (saved, error) in
         print("saved", saved, error)
       })
