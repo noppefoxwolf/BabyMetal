@@ -30,22 +30,7 @@ public class CameraSource: Source, CaptureDeviceDelegate {
   }
   
   func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-    let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
-    let width = CVPixelBufferGetWidthOfPlane(imageBuffer, 0)
-    let height = CVPixelBufferGetHeightOfPlane(imageBuffer, 0)
-    var imageTexture: CVMetalTexture?
-    let result = CVMetalTextureCacheCreateTextureFromImage(kCFAllocatorDefault,
-                                                           textureCache!,
-                                                           imageBuffer,
-                                                           nil,
-                                                           .bgra8Unorm,
-                                                           width,
-                                                           height,
-                                                           0,
-                                                           &imageTexture)
-    if result == kCVReturnSuccess {
-      let texture = CVMetalTextureGetTexture(imageTexture!)!
-      targets.forEach({ $0.render(Frame(texture: texture, sampleBuffer: sampleBuffer)) })
-    }
+    guard let texture = MTLTextureFactory.make(with: sampleBuffer, textureCache: textureCache) else { return }
+    targets.forEach({ $0.render(Frame(texture: texture, sampleBuffer: sampleBuffer)) })
   }
 }
