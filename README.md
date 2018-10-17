@@ -1,4 +1,4 @@
-# [WIP] BabyMetal
+# [Archive] BabyMetal
 
 [![CI Status](https://img.shields.io/travis/noppefoxwolf/BabyMetal.svg?style=flat)](https://travis-ci.org/noppefoxwolf/BabyMetal)
 [![Version](https://img.shields.io/cocoapods/v/BabyMetal.svg?style=flat)](https://cocoapods.org/pods/BabyMetal)
